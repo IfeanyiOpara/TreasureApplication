@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "876962537629",
+    "project_id": "treasureapplication",
+    "storage_bucket": "treasureapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876962537629:android:cca015c29b7844362df474",
+        "android_client_info": {
+          "package_name": "ifeanyi.opara.treasureapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876962537629-9j8n0cbe85s4iefqnrijpqfp3efp631l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ifeanyi.opara.treasureapplication",
+            "certificate_hash": "dbda7c5fb1611a92815c24c935dd9b8fa4079f4b"
+          }
+        },
+        {
+          "client_id": "876962537629-sg4uabm5e8venue90947b6qhjlkhbtji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJLHQocgetuAgZPjE7sHInGCllKROLCxg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876962537629-sg4uabm5e8venue90947b6qhjlkhbtji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
