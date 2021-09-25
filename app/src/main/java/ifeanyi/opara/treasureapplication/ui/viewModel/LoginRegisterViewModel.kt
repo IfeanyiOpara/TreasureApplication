@@ -48,8 +48,8 @@ class LoginRegisterViewModel @Inject constructor(
         return encrypt.decryptButtonClicked()
     }
 
-    fun loadImage() : Bitmap {
-        return encrypt.convertByteArrayToBitmap()
+    fun convert(imageView: ImageView) : Bitmap {
+        return encrypt.convertImageToBitmap(imageView)
     }
 
 }

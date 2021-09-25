@@ -47,12 +47,14 @@ public class Encrypt {
 
     }
 
+    //collecting the converted bitmap and converting it to byteArray for encryption, the returns the encrypted value in string format
     public String encryptButtonClicked(ImageView imageView) throws Exception {
-        String byteString = convertImageToBitmap(imageView);
+        String byteString = convertImageToBitmap(imageView).toString();
         encrypt = encrypt(byteString.getBytes(), secretKey, IV);
         return new String(encrypt, "UTF-8");
     }
 
+    //return the decrypted value in string format
     public String decryptButtonClicked() throws Exception {
         return decrypt(encrypt, secretKey, IV);
     }
@@ -64,13 +66,14 @@ public class Encrypt {
         return bitmap2;
     }
 
-    //returns string
-    public String convertImageToBitmap(ImageView imageView1){
+    //returns the bitmap in string format
+    public Bitmap convertImageToBitmap(ImageView imageView1){
         Drawable drawable = imageView1.getDrawable();
         bitmap1 = ((BitmapDrawable) drawable).getBitmap();
-        bitmap1.compress(Bitmap.CompressFormat.JPEG, 70, bytearrayoutputstream);
-        BYTE = bytearrayoutputstream.toByteArray();
-        return BYTE.toString();
+        return bitmap1;
+//        bitmap1.compress(Bitmap.CompressFormat.JPEG, 70, bytearrayoutputstream);
+//        BYTE = bytearrayoutputstream.toByteArray();
+//        return BYTE.toString();
     }
 
     public static byte[] encrypt(byte[] plaintext, SecretKey key, byte[] IV) throws Exception {

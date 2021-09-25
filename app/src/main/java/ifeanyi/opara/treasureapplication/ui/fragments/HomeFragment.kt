@@ -16,11 +16,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.common.util.Base64Utils.decode
 import ifeanyi.opara.treasureapplication.R
 import ifeanyi.opara.treasureapplication.databinding.FragmentHomeBinding
 import ifeanyi.opara.treasureapplication.ui.viewModel.LoginRegisterViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.io.ByteArrayOutputStream
+import java.lang.Byte.decode
+import java.lang.Integer.decode
 import java.security.SecureRandom
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -29,17 +32,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel : LoginRegisterViewModel by activityViewModels()
 
-    private lateinit var drawable: Drawable
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        var IV : ByteArray = ByteArray(12)
-        var random : SecureRandom = SecureRandom()
-        random.nextBytes(IV)
 
         _binding = FragmentHomeBinding.bind(view)
 
@@ -76,7 +74,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             decryptBtn.setOnClickListener {
                 try {
                     decryptText.text = viewModel.decrypt()
-                    homeImg2.setImageBitmap(viewModel.loadImage())
+                    val converted = viewModel.convert(homeImg)
+                    homeImg2.setImageBitmap(converted)
+                    Log.d("converted", converted.toString())
 
                 } catch (e: Exception) {
                     e.printStackTrace()
