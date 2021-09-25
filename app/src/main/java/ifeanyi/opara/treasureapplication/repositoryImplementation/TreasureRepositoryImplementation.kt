@@ -19,13 +19,11 @@ class TreasureRepositoryImplementation(private val application: Application) : T
     private var firebaseUser : MutableLiveData<FirebaseUser> = MutableLiveData()
     private var firebaseAuth : FirebaseAuth = FirebaseAuth.getInstance()
     //private var mAuth : MutableLiveData<FirebaseAuth> = MutableLiveData()
-    private var loggedOutMutableLiveData : MutableLiveData<Boolean> = MutableLiveData()
 
     init {
 
         if (firebaseAuth.currentUser != null){
             firebaseUser.postValue(firebaseAuth.currentUser)
-            loggedOutMutableLiveData.postValue(false)
         }
     }
 
@@ -64,16 +62,9 @@ class TreasureRepositoryImplementation(private val application: Application) : T
             })
     }
 
-    override fun logout() {
-        firebaseAuth.signOut()
-        loggedOutMutableLiveData.postValue(true)
-    }
 
     override fun getUserMutableLiveData(): MutableLiveData<FirebaseUser> {
         return firebaseUser
     }
 
-    override fun getLoggedOutMutableLiveData(): MutableLiveData<Boolean> {
-        return loggedOutMutableLiveData
-    }
 }

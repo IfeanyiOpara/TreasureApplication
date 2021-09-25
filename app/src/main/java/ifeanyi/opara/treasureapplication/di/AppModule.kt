@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ifeanyi.opara.treasureapplication.mainRepository.TreasureRepository
 import ifeanyi.opara.treasureapplication.repositoryImplementation.TreasureRepositoryImplementation
+import ifeanyi.opara.treasureapplication.util.Encrypt
 import javax.inject.Singleton
 
 @Module
@@ -17,6 +18,11 @@ object AppModule {
     @Singleton
     fun provideRepository(application: Application) : TreasureRepository{
         return TreasureRepositoryImplementation(application)
+    }
+
+    @Provides
+    fun provideEncrypt() : Encrypt{
+        return Encrypt()
     }
 
 }

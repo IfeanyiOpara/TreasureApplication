@@ -11,10 +11,7 @@ interface TreasureRepository {
 
     fun register(email : String, password: String)
 
-    fun logout()
-
     fun getUserMutableLiveData() : MutableLiveData<FirebaseUser>
 
-    fun getLoggedOutMutableLiveData() : MutableLiveData<Boolean>
 
 }

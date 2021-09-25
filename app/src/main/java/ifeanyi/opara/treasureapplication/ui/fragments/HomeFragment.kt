@@ -2,6 +2,10 @@ package ifeanyi.opara.treasureapplication.ui.fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,12 +19,17 @@ import androidx.navigation.fragment.findNavController
 import ifeanyi.opara.treasureapplication.R
 import ifeanyi.opara.treasureapplication.databinding.FragmentHomeBinding
 import ifeanyi.opara.treasureapplication.ui.viewModel.LoginRegisterViewModel
-import ifeanyi.opara.treasureapplication.ui.viewModel.LogoutViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.io.ByteArrayOutputStream
+import java.security.SecureRandom
+import javax.crypto.KeyGenerator
+import javax.crypto.SecretKey
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel : LoginRegisterViewModel by activityViewModels()
+
+    private lateinit var drawable: Drawable
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -28,15 +37,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentHomeBinding.bind(view)
+        var IV : ByteArray = ByteArray(12)
+        var random : SecureRandom = SecureRandom()
+        random.nextBytes(IV)
 
-        viewModel.getLoggedOutMutableLiveData().observe(viewLifecycleOwner, Observer { loggedOut ->
-            Log.d("Home Fragment", "${loggedOut == true}")
-            if (loggedOut) {
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
-                logout()
-            }
-        })
+        _binding = FragmentHomeBinding.bind(view)
 
         binding.apply {
 //            logoutBtn.setOnClickListener {
@@ -56,6 +61,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     startActivityForResult(it, 0)
                 }
             }
+
+            encryptBtn.setOnClickListener {
+                try {
+                    val encrypt =  viewModel.encrypt(homeImg)
+                    Log.d("TestTwo", encrypt)
+
+                    encryptText.text = encrypt
+                } catch (e : java.lang.Exception){
+                    e.printStackTrace()
+                }
+            }
+
+            decryptBtn.setOnClickListener {
+                try {
+                    decryptText.text = viewModel.decrypt()
+                    homeImg2.setImageBitmap(viewModel.loadImage())
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         }
 
     }
@@ -70,9 +96,5 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    fun logout(){
-        val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
-        findNavController().navigate(action)
-    }
 
 }
