@@ -4,15 +4,11 @@ import android.graphics.Bitmap
 import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ifeanyi.opara.treasureapplication.mainRepository.TreasureRepository
 import ifeanyi.opara.treasureapplication.util.Encrypt
-import javax.crypto.Cipher
-import javax.crypto.SecretKey
-import javax.crypto.spec.IvParameterSpec
-import javax.crypto.spec.SecretKeySpec
+
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,11 +17,7 @@ class LoginRegisterViewModel @Inject constructor(
         private var encrypt: Encrypt
     ) : ViewModel(){
 
-    private var userMutableLiveData : MutableLiveData<FirebaseUser>
-
-    init {
-        userMutableLiveData = repository.getUserMutableLiveData()
-    }
+    private var userMutableLiveData : MutableLiveData<FirebaseUser> = repository.getUserMutableLiveData()
 
     fun register(email : String, password : String){
         repository.register(email, password)

@@ -42,17 +42,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.bind(view)
 
         binding.apply {
-//            logoutBtn.setOnClickListener {
-//                viewModel.logout()
-//            }
-
-//            browseBtn.setOnClickListener {
-//                Intent(Intent.ACTION_OPEN_DOCUMENT).also {
-//                    it.type = "*/*"
-//                    startActivityForResult(it, 0)
-//                }
-//            }
-
+            // button to browse the local files
             browseBtn.setOnClickListener {
                 Intent(Intent.ACTION_GET_CONTENT).also {
                     it.type = "image/*"
@@ -60,6 +50,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
 
+            // button to encrypt the file
             encryptBtn.setOnClickListener {
                 try {
                     val encrypt =  viewModel.encrypt(homeImg)
@@ -71,6 +62,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
 
+            // button to decrypt the file and load it
             decryptBtn.setOnClickListener {
                 try {
                     decryptText.text = viewModel.decrypt()

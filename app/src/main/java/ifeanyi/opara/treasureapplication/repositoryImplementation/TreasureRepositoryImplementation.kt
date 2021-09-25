@@ -5,11 +5,9 @@ import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import ifeanyi.opara.treasureapplication.mainRepository.TreasureRepository
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton

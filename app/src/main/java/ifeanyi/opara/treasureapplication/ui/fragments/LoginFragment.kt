@@ -5,9 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import ifeanyi.opara.treasureapplication.R
 import ifeanyi.opara.treasureapplication.databinding.FragmentLoginBinding
 import ifeanyi.opara.treasureapplication.ui.viewModel.LoginRegisterViewModel
@@ -24,7 +22,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         _binding = FragmentLoginBinding.bind(view)
 
-        viewModel.getUserMutableLiveData().observe(viewLifecycleOwner, Observer {
+        viewModel.getUserMutableLiveData().observe(viewLifecycleOwner, {
             Log.d("Login Fragment", "${it == null}")
             if (it != null){
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()

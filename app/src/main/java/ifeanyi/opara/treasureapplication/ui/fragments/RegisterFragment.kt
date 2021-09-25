@@ -22,7 +22,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
         _binding = FragmentRegisterBinding.bind(view)
 
-        viewModel.getUserMutableLiveData().observe(viewLifecycleOwner, Observer {
+        viewModel.getUserMutableLiveData().observe(viewLifecycleOwner, {
             if (it != null) {
                 val action = RegisterFragmentDirections.actionFragmentRegisterToHomeFragment()
                 findNavController().navigate(action)

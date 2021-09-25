@@ -23,10 +23,8 @@ public class Encrypt {
 
     byte[] encrypt;
 
-    Drawable drawable;
-    Bitmap bitmap1, bitmap2;
+    Bitmap bitmap1;
     ByteArrayOutputStream bytearrayoutputstream;
-    byte[] BYTE;
     byte[] IV;
 
     public Encrypt(){
@@ -59,23 +57,21 @@ public class Encrypt {
         return decrypt(encrypt, secretKey, IV);
     }
 
-    public Bitmap convertByteArrayToBitmap() throws Exception {
-        String decrypt = decryptButtonClicked();
-        byte[] decryptByte = decrypt.getBytes();
-        bitmap2 = BitmapFactory.decodeByteArray(decryptByte, 0, decrypt.length());
-        return bitmap2;
-    }
+//    public Bitmap convertByteArrayToBitmap() throws Exception {
+//        String decrypt = decryptButtonClicked();
+//        byte[] decryptByte = decrypt.getBytes();
+//        bitmap2 = BitmapFactory.decodeByteArray(decryptByte, 0, decrypt.length());
+//        return bitmap2;
+//    }
 
     //returns the bitmap in string format
     public Bitmap convertImageToBitmap(ImageView imageView1){
         Drawable drawable = imageView1.getDrawable();
         bitmap1 = ((BitmapDrawable) drawable).getBitmap();
         return bitmap1;
-//        bitmap1.compress(Bitmap.CompressFormat.JPEG, 70, bytearrayoutputstream);
-//        BYTE = bytearrayoutputstream.toByteArray();
-//        return BYTE.toString();
     }
 
+    // encrypt function
     public static byte[] encrypt(byte[] plaintext, SecretKey key, byte[] IV) throws Exception {
         Cipher cipher = Cipher.getInstance("AES");
         SecretKeySpec keySpec = new SecretKeySpec(key.getEncoded(), "AES");
@@ -85,6 +81,7 @@ public class Encrypt {
         return cipherText;
     }
 
+    //decrypt function that returns the decrypted value in string format
     public static String decrypt(byte[] cipherText, SecretKey key, byte[] IV) {
         try {
             Cipher cipher = Cipher.getInstance("AES");
